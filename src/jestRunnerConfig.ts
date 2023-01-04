@@ -10,7 +10,7 @@ export class JestRunnerConfig {
    */
   public get jestCommand(): string {
     // custom
-    const jestCommand: string = vscode.workspace.getConfiguration().get('jestrunner.jestCommand');
+    const jestCommand: string = vscode.workspace.getConfiguration().get('mocharunner.jestCommand');
     if (jestCommand) {
       return jestCommand;
     }
@@ -23,23 +23,23 @@ export class JestRunnerConfig {
   }
 
   public get changeDirectoryToWorkspaceRoot(): boolean {
-    return vscode.workspace.getConfiguration().get('jestrunner.changeDirectoryToWorkspaceRoot');
+    return vscode.workspace.getConfiguration().get('mocharunner.changeDirectoryToWorkspaceRoot');
   }
 
   public get preserveEditorFocus(): boolean {
-    return vscode.workspace.getConfiguration().get('jestrunner.preserveEditorFocus') || false;
+    return vscode.workspace.getConfiguration().get('mocharunner.preserveEditorFocus') || false;
   }
 
   public get jestBinPath(): string {
     // custom
-    let jestPath: string = vscode.workspace.getConfiguration().get('jestrunner.jestPath');
+    let jestPath: string = vscode.workspace.getConfiguration().get('mocharunner.jestPath');
     if (jestPath) {
       return jestPath;
     }
 
     // default
-    const fallbackRelativeJestBinPath = 'node_modules/jest/bin/jest.js';
-    const mayRelativeJestBin = ['node_modules/.bin/jest', 'node_modules/jest/bin/jest.js'];
+    const fallbackRelativeJestBinPath = 'node_modules/mocha/bin/mocha.js';
+    const mayRelativeJestBin = ['node_modules/.bin/mocha', 'node_modules/mocha/bin/mocha.js'];
     const cwd = this.cwd;
 
     jestPath = mayRelativeJestBin.find((relativeJestBin) => isNodeExecuteAbleFile(path.join(cwd, relativeJestBin)));
@@ -49,12 +49,12 @@ export class JestRunnerConfig {
   }
 
   public get projectPath(): string {
-    return vscode.workspace.getConfiguration().get('jestrunner.projectPath') || this.currentWorkspaceFolderPath;
+    return vscode.workspace.getConfiguration().get('mocharunner.projectPath') || this.currentWorkspaceFolderPath;
   }
 
   public get cwd(): string {
     return (
-      vscode.workspace.getConfiguration().get('jestrunner.projectPath') ||
+      vscode.workspace.getConfiguration().get('mocharunner.projectPath') ||
       this.currentPackagePath ||
       this.currentWorkspaceFolderPath
     );
@@ -84,7 +84,7 @@ export class JestRunnerConfig {
 
   public get jestConfigPath(): string {
     // custom
-    const configPath: string = vscode.workspace.getConfiguration().get('jestrunner.configPath');
+    const configPath: string = vscode.workspace.getConfiguration().get('mocharunner.configPath');
     if (!configPath) {
       return this.findConfigPath();
     }
@@ -95,7 +95,7 @@ export class JestRunnerConfig {
 
   getJestConfigPath(targetPath: string): string {
     // custom
-    const configPath: string = vscode.workspace.getConfiguration().get('jestrunner.configPath');
+    const configPath: string = vscode.workspace.getConfiguration().get('mocharunner.configPath');
     if (!configPath) {
       return this.findConfigPath(targetPath);
     }
@@ -108,7 +108,7 @@ export class JestRunnerConfig {
     let currentFolderPath: string = targetPath || path.dirname(vscode.window.activeTextEditor.document.fileName);
     let currentFolderConfigPath: string;
     do {
-      for (const configFilename of ['jest.config.js', 'jest.config.ts']) {
+      for (const configFilename of ['.mocharc.cjs', '.mocharc.js', '.mocharc.json']) {
         currentFolderConfigPath = path.join(currentFolderPath, configFilename);
 
         if (fs.existsSync(currentFolderConfigPath)) {
@@ -121,7 +121,7 @@ export class JestRunnerConfig {
   }
 
   public get runOptions(): string[] | null {
-    const runOptions = vscode.workspace.getConfiguration().get('jestrunner.runOptions');
+    const runOptions = vscode.workspace.getConfiguration().get('mocharunner.runOptions');
     if (runOptions) {
       if (Array.isArray(runOptions)) {
         return runOptions;
@@ -135,7 +135,7 @@ export class JestRunnerConfig {
   }
 
   public get debugOptions(): Partial<vscode.DebugConfiguration> {
-    const debugOptions = vscode.workspace.getConfiguration().get('jestrunner.debugOptions');
+    const debugOptions = vscode.workspace.getConfiguration().get('mocharunner.debugOptions');
     if (debugOptions) {
       return debugOptions;
     }
@@ -145,7 +145,7 @@ export class JestRunnerConfig {
   }
 
   public get isCodeLensDisabled(): boolean {
-    const isCodeLensDisabled: boolean = vscode.workspace.getConfiguration().get('jestrunner.disableCodeLens');
+    const isCodeLensDisabled: boolean = vscode.workspace.getConfiguration().get('mocharunner.disableCodeLens');
     return isCodeLensDisabled ? isCodeLensDisabled : false;
   }
 
@@ -157,7 +157,7 @@ export class JestRunnerConfig {
   }
 
   public get codeLensOptions(): CodeLensOption[] {
-    const codeLensOptions = vscode.workspace.getConfiguration().get('jestrunner.codeLens');
+    const codeLensOptions = vscode.workspace.getConfiguration().get('mocharunner.codeLens');
     if (Array.isArray(codeLensOptions)) {
       return validateCodeLensOptions(codeLensOptions);
     }
@@ -165,11 +165,11 @@ export class JestRunnerConfig {
   }
 
   public get isYarnPnpSupportEnabled(): boolean {
-    const isYarnPnp: boolean = vscode.workspace.getConfiguration().get('jestrunner.enableYarnPnpSupport');
+    const isYarnPnp: boolean = vscode.workspace.getConfiguration().get('mocharunner.enableYarnPnpSupport');
     return isYarnPnp ? isYarnPnp : false;
   }
   public get getYarnPnpCommand(): string {
-    const yarnPnpCommand: string = vscode.workspace.getConfiguration().get('jestrunner.yarnPnpCommand');
+    const yarnPnpCommand: string = vscode.workspace.getConfiguration().get('mocharunner.yarnPnpCommand');
     return yarnPnpCommand;
   }
 }

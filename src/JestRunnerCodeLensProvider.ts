@@ -10,10 +10,10 @@ function getCodeLensForOption(range: Range, codeLensOption: CodeLensOption, full
     coverage: 'Run --coverage',
   };
   const commandMap: Record<CodeLensOption, string> = {
-    run: 'extension.runJest',
-    debug: 'extension.debugJest',
-    watch: 'extension.watchJest',
-    coverage: 'extension.runJestCoverage',
+    run: 'extension.runMocha',
+    debug: 'extension.debugMocha',
+    watch: 'extension.watchMocha',
+    coverage: 'extension.runMochaCoverage',
   };
   return new CodeLens(range, {
     arguments: [fullTestName],

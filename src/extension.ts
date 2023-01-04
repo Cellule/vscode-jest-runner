@@ -11,28 +11,28 @@ export function activate(context: vscode.ExtensionContext): void {
   const codeLensProvider = new JestRunnerCodeLensProvider(config.codeLensOptions);
 
   const runJest = vscode.commands.registerCommand(
-    'extension.runJest',
+    'extension.runMocha',
     async (argument: Record<string, unknown> | string) => {
       return jestRunner.runCurrentTest(argument);
     }
   );
 
   const runJestCoverage = vscode.commands.registerCommand(
-    'extension.runJestCoverage',
+    'extension.runMochaCoverage',
     async (argument: Record<string, unknown> | string) => {
       return jestRunner.runCurrentTest(argument, ['--coverage']);
     }
   );
 
-  const runJestPath = vscode.commands.registerCommand('extension.runJestPath', async (argument: vscode.Uri) =>
+  const runJestPath = vscode.commands.registerCommand('extension.runMochaPath', async (argument: vscode.Uri) =>
     jestRunner.runTestsOnPath(argument.path)
   );
-  const runJestAndUpdateSnapshots = vscode.commands.registerCommand('extension.runJestAndUpdateSnapshots', async () => {
+  const runJestAndUpdateSnapshots = vscode.commands.registerCommand('extension.runMochaAndUpdateSnapshots', async () => {
     jestRunner.runCurrentTest('', ['-u']);
   });
-  const runJestFile = vscode.commands.registerCommand('extension.runJestFile', async () => jestRunner.runCurrentFile());
+  const runJestFile = vscode.commands.registerCommand('extension.runMochaFile', async () => jestRunner.runCurrentFile());
   const debugJest = vscode.commands.registerCommand(
-    'extension.debugJest',
+    'extension.debugMocha',
     async (argument: Record<string, unknown> | string) => {
       if (typeof argument === 'string') {
         return jestRunner.debugCurrentTest(argument);
@@ -41,20 +41,20 @@ export function activate(context: vscode.ExtensionContext): void {
       }
     }
   );
-  const debugJestPath = vscode.commands.registerCommand('extension.debugJestPath', async (argument: vscode.Uri) =>
+  const debugJestPath = vscode.commands.registerCommand('extension.debugMochaPath', async (argument: vscode.Uri) =>
     jestRunner.debugTestsOnPath(argument.path)
   );
-  const runPrev = vscode.commands.registerCommand('extension.runPrevJest', async () => jestRunner.runPreviousTest());
-  const runJestFileWithCoverage = vscode.commands.registerCommand('extension.runJestFileWithCoverage', async () =>
+  const runPrev = vscode.commands.registerCommand('extension.runPrevMocha', async () => jestRunner.runPreviousTest());
+  const runJestFileWithCoverage = vscode.commands.registerCommand('extension.runMochaFileWithCoverage', async () =>
     jestRunner.runCurrentFile(['--coverage'])
   );
 
-  const runJestFileWithWatchMode = vscode.commands.registerCommand('extension.runJestFileWithWatchMode', async () =>
+  const runJestFileWithWatchMode = vscode.commands.registerCommand('extension.runMochaFileWithWatchMode', async () =>
     jestRunner.runCurrentFile(['--watch'])
   );
 
   const watchJest = vscode.commands.registerCommand(
-    'extension.watchJest',
+    'extension.watchMocha',
     async (argument: Record<string, unknown> | string) => {
       return jestRunner.runCurrentTest(argument, ['--watch']);
     }
@@ -63,7 +63,7 @@ export function activate(context: vscode.ExtensionContext): void {
   if (!config.isCodeLensDisabled) {
     const docSelectors: vscode.DocumentFilter[] = [
       {
-        pattern: vscode.workspace.getConfiguration().get('jestrunner.codeLensSelector'),
+        pattern: vscode.workspace.getConfiguration().get('mocharunner.codeLensSelector'),
       },
     ];
     const codeLensProviderDisposable = vscode.languages.registerCodeLensProvider(docSelectors, codeLensProvider);

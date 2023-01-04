@@ -26,31 +26,31 @@
       {
         "title": "Jest-Runner Config",
         "properties": {
-          "jestrunner.configPath": {
+          "mocharunner.configPath": {
             "type": "string",
             "default": "",
             "description": "Jest config path (relative to ${workFolder} e.g. jest-config.json)",
             "scope": "window"
           },
-          "jestrunner.jestPath": {
+          "mocharunner.jestPath": {
             "type": "string",
             "default": "",
             "description": "Absolute path to jest bin file (e.g. /usr/lib/node_modules/jest/bin/jest.js)",
             "scope": "window"
           },
-          "jestrunner.projectPath": {
+          "mocharunner.projectPath": {
             "type": "string",
             "default": "",
             "description": "Absolute path to project directory (e.g. /home/me/project/sub-folder)",
             "scope": "window"
           },
-          "jestrunner.debugOptions": {
+          "mocharunner.debugOptions": {
             "type": "object",
             "default": {},
             "description": "Add or overwrite vscode debug configurations (only in debug mode) (e.g. { \"args\": [\"--no-cache\"] })",
             "scope": "window"
           },
-          "jestrunner.runOptions": {
+          "mocharunner.runOptions": {
             "type": "array",
             "default": [],
             "items": {
@@ -60,25 +60,25 @@
             "description": "Add CLI Options to the Jest Command e.g. https://jestjs.io/docs/en/cli",
             "scope": "window"
           },
-          "jestrunner.jestCommand": {
+          "mocharunner.jestCommand": {
             "type": "string",
             "default": "",
             "description": "Define an alternative Jest command (e.g. for Create React App and similar abstractions)",
             "scope": "window"
           },
-          "jestrunner.disableCodeLens": {
+          "mocharunner.disableCodeLens": {
             "type": "boolean",
             "default": false,
             "description": "Disable CodeLens feature",
             "scope": "window"
           },
-          "jestrunner.runInExternalNativeTerminal": {
+          "mocharunner.runInExternalNativeTerminal": {
             "type": "boolean",
             "default": false,
             "description": "Run jest runner in external native terminal. Disabled on debug mode",
             "scope": "window"
           },
-          "jestrunner.codeLens": {
+          "mocharunner.codeLens": {
             "type": "array",
             "default": [
               "run",
@@ -91,30 +91,30 @@
             },
             "scope": "window"
           },
-          "jestrunner.codeLensSelector": {
+          "mocharunner.codeLensSelector": {
             "type": "string",
             "default": "**/*.{test,spec}.{js,jsx,ts,tsx}",
             "description": "CodeLens will be shown on files matching this pattern"
           },
-          "jestrunner.enableYarnPnpSupport": {
+          "mocharunner.enableYarnPnpSupport": {
             "type": "boolean",
             "default": false,
             "description": "Enable if you are using Yarn 2 with Plug'n'Play",
             "scope": "window"
           },
-          "jestrunner.changeDirectoryToWorkspaceRoot": {
+          "mocharunner.changeDirectoryToWorkspaceRoot": {
             "type": "boolean",
             "default": true,
             "description": "Changes directory to workspace root before executing the test",
             "scope": "window"
           },
-          "jestrunner.preserveEditorFocus": {
+          "mocharunner.preserveEditorFocus": {
             "type": "boolean",
             "default": false,
             "description": "Preserve focus on editor when running tests",
             "scope": "window"
           },
-          "jestrunner.yarnPnpCommand": {
+          "mocharunner.yarnPnpCommand": {
             "type": "string",
             "default": "yarn-*.*js",
             "description": "Command for debugging with Plug'n'Play",
@@ -125,69 +125,69 @@
     ],
     "commands": [
       {
-        "command": "extension.runJest",
+        "command": "extension.runMocha",
         "title": "Run Jest"
       },
       {
-        "command": "extension.runJestPath",
+        "command": "extension.runMochaPath",
         "title": "Run Jest on Path"
       },
       {
-        "command": "extension.runJestCoverage",
+        "command": "extension.runMochaCoverage",
         "title": "Run Jest and generate Coverage"
       },
       {
-        "command": "extension.runJestAndUpdateSnapshots",
+        "command": "extension.runMochaAndUpdateSnapshots",
         "title": "Run Jest and update Snapshots"
       },
       {
-        "command": "extension.runPrevJest",
+        "command": "extension.runPrevMocha",
         "title": "Run Jest - Run Previous Test"
       },
       {
-        "command": "extension.runJestFile",
+        "command": "extension.runMochaFile",
         "title": "Run Jest on File"
       },
       {
-        "command": "extension.debugJest",
+        "command": "extension.debugMocha",
         "title": "Debug Jest"
       },
       {
-        "command": "extension.debugJestPath",
+        "command": "extension.debugMochaPath",
         "title": "Debug Jest on Path"
       },
       {
-        "command": "extension.runJestFileWithCoverage",
+        "command": "extension.runMochaFileWithCoverage",
         "title": "Run Jest File and generate Coverage"
       },
       {
-        "command": "extension.runJestFileWithWatchMode",
+        "command": "extension.runMochaFileWithWatchMode",
         "title": "Run Jest File in Watch Mode"
       },
       {
-        "command": "extension.watchJest",
+        "command": "extension.watchMocha",
         "title": "Run Jest --watch"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "extension.runJest",
+          "command": "extension.runMocha",
           "group": "02_jest"
         },
         {
-          "command": "extension.debugJest",
+          "command": "extension.debugMocha",
           "group": "02_jest"
         }
       ],
       "explorer/context": [
         {
-          "command": "extension.runJestPath",
+          "command": "extension.runMochaPath",
           "when": "explorerResourceIsFolder || resourceFilename =~ /.*\\.(spec|test)\\.(js|jsx|ts|tsx)$/",
           "group": "02_jest@1"
         },
         {
-          "command": "extension.debugJestPath",
+          "command": "extension.debugMochaPath",
           "when": "explorerResourceIsFolder || resourceFilename =~ /.*\\.(spec|test)\\.(js|jsx|ts|tsx)$/",
           "group": "02_jest@2"
         }
