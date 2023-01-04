@@ -1,6 +1,6 @@
 {
-  "name": "vscode-jest-runner",
-  "displayName": "Jest Runner",
+  "name": "vscode-mocha-runner",
+  "displayName": "Mocha Runner",
   "description": "Simple way to run or debug a single (or multiple) tests from context-menu",
   "version": "0.4.59",
   "publisher": "firsttris",
@@ -64,6 +64,12 @@
             "type": "string",
             "default": "",
             "description": "Define an alternative Jest command (e.g. for Create React App and similar abstractions)",
+            "scope": "window"
+          },
+          "mocharunner.terminalEnv": {
+            "type": "object",
+            "default": {},
+            "description": "Define shell environment to be used in the terminal",
             "scope": "window"
           },
           "mocharunner.disableCodeLens": {

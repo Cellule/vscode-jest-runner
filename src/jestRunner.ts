@@ -212,12 +212,12 @@ export class JestRunner {
 
     const jestConfigPath = this.config.getJestConfigPath(filePath);
     if (jestConfigPath) {
-      args.push('-c');
+      args.push('--config');
       args.push(quoter(normalizePath(jestConfigPath)));
     }
 
     if (testName) {
-      args.push('-t');
+      args.push('--fgrep');
       args.push(quoter(escapeSingleQuotes(testName)));
     }
 
@@ -255,7 +255,10 @@ export class JestRunner {
     this.commands = [];
 
     if (!this.terminal) {
-      this.terminal = vscode.window.createTerminal('jest');
+      this.terminal = vscode.window.createTerminal({
+        name: 'mocha',
+        env: this.config.terminalEnv,
+      });
     }
 
     this.terminal.show(this.config.preserveEditorFocus);
@@ -270,7 +273,10 @@ export class JestRunner {
     }
 
     if (!this.terminal) {
-      this.terminal = vscode.window.createTerminal('jest');
+      this.terminal = vscode.window.createTerminal({
+        name: 'mocha',
+        env: this.config.terminalEnv,
+      });
     }
     this.terminal.show(this.config.preserveEditorFocus);
     await vscode.commands.executeCommand('workbench.action.terminal.clear');

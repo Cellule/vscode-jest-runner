@@ -134,6 +134,14 @@ export class JestRunnerConfig {
     return null;
   }
 
+  public get terminalEnv(): Record<string, any> | null {
+    const terminalEnv = vscode.workspace.getConfiguration().get('mocharunner.terminalEnv');
+    if (typeof terminalEnv === 'object') {
+      return terminalEnv;
+    }
+    return null;
+  }
+
   public get debugOptions(): Partial<vscode.DebugConfiguration> {
     const debugOptions = vscode.workspace.getConfiguration().get('mocharunner.debugOptions');
     if (debugOptions) {
