@@ -66,12 +66,6 @@
             "description": "Define an alternative Jest command (e.g. for Create React App and similar abstractions)",
             "scope": "window"
           },
-          "mocharunner.terminalEnv": {
-            "type": "object",
-            "default": {},
-            "description": "Define shell environment to be used in the terminal",
-            "scope": "window"
-          },
           "mocharunner.disableCodeLens": {
             "type": "boolean",
             "default": false,
